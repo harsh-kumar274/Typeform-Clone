@@ -9,10 +9,10 @@ export const formsApi = {
 
   get: (id: number) => api.get<Form>(`/forms/${id}`),
 
-  create: (title: string, description?: string) =>
+  create: (title: string, description?: string | null) =>
     api.post<Form>("/forms", { title, description }),
 
-  update: (id: number, data: { title?: string; description?: string; theme_color?: string; thank_you_message?: string }) =>
+  update: (id: number, data: { title?: string; description?: string | null; theme_color?: string; thank_you_message?: string }) =>
     api.patch<Form>(`/forms/${id}`, data),
 
   delete: (id: number) => api.delete<void>(`/forms/${id}`),

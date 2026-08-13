@@ -5,10 +5,10 @@ import { api } from "./client";
 import type { Question, QuestionOption, QuestionType } from "../types";
 
 export const questionsApi = {
-  create: (formId: number, data: { type: QuestionType; title: string; description?: string; is_required?: boolean; settings_json?: Record<string, unknown> }) =>
+  create: (formId: number, data: { type: QuestionType; title: string; description?: string | null; is_required?: boolean; settings_json?: Record<string, unknown> | null }) =>
     api.post<Question>(`/forms/${formId}/questions`, data),
 
-  update: (id: number, data: { type?: QuestionType; title?: string; description?: string; is_required?: boolean; settings_json?: Record<string, unknown> }) =>
+  update: (id: number, data: { type?: QuestionType; title?: string; description?: string | null; is_required?: boolean; settings_json?: Record<string, unknown> | null }) =>
     api.patch<Question>(`/questions/${id}`, data),
 
   delete: (id: number) => api.delete<void>(`/questions/${id}`),
