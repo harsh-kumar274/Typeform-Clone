@@ -2,7 +2,8 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { resultsApi, formsApi } from "@/lib/api/responses";
+import { resultsApi } from "@/lib/api/responses";
+import { formsApi } from "@/lib/api/forms";
 import type { Form, FormStats, PaginatedResponses } from "@/lib/types";
 import { useToast } from "@/components/shared/Toast";
 import Modal from "@/components/shared/Modal";
