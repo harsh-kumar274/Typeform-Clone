@@ -25,13 +25,18 @@ def create_app() -> FastAPI:
 
     # --- CORS ---
     # Read from env so deployed frontends aren't CORS-blocked.
+    # Supports multiple comma-separated URLs in FRONTEND_URL.
     # Falls back to localhost:3000 for local dev.
     frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
-    origins = [frontend_url]
+    origins = [url.strip() for url in frontend_url.split(",")]
+
+    # Always allow localhost for local dev
+    origins += ["http://localhost:3000", "http://localhost:3001"]
 
     app.add_middleware(
         CORSMiddleware,
         allow_origins=origins,
+        allow_origin_regex=r"https://.*\.vercel\.app",
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
